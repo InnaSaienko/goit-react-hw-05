@@ -1,0 +1,10 @@
+.list {
+    border: 2px solid  #63529a;
+    border-radius: 8px;
+    padding: 10px;
+    width: 60vw;
+    display: grid;
+    grid-template-columns: repeat(3, 1fr);
+    gap: 5px;
+    margin-top: 20px;
+}
