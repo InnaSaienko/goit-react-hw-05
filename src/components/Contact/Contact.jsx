@@ -1,7 +1,7 @@
 import React from 'react';
-import s from "./ContactCard.module.css";
+import s from "./Contact.module.css";
 
-const ContactCard = ({user, deleteUser}) => {
+const Contact = ({user, deleteUser}) => {
     const {name, number} = user;
     console.log(user);
     return (
@@ -24,4 +24,4 @@ const ContactCard = ({user, deleteUser}) => {
     );
 };
 
-export default ContactCard;
+export default Contact;
