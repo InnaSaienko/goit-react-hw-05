@@ -19,10 +19,12 @@ export default function App() {
 
     const handleAddUser = (newUser) => {
         setUsers(prev => [...prev, { ...newUser }]);
+        localStorage.setItem('users', JSON.stringify(users));
     };
 
     const deleteUser = (userToDelete) => {
         setUsers(prev => prev.filter(user => user !== userToDelete));
+        localStorage.setItem('users', JSON.stringify(users));
     };
 
     return (
