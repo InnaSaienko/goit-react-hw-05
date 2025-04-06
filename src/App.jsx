@@ -7,39 +7,40 @@ import {ContactData} from "./constants/ContactData.js";
 import s from "./App.module.css"
 
 export default function App() {
-    const [users, setUsers] = useState([]);
+    const [contacts, setContacts] = useState(() =>
+        JSON.parse(localStorage.getItem('users')) || [])
     const [filter, setFilter] = useState("");
 
     useEffect(() => {
         if (typeof window !== 'undefined') {
             const storedUsers = JSON.parse(localStorage.getItem('users'));
             if (storedUsers) {
-                setUsers(storedUsers);
+                setContacts(storedUsers);
             } else {
-                setUsers(ContactData);
+                setContacts(ContactData);
             }
         }
     }, []);
 
     useEffect(() => {
-        localStorage.setItem('users', JSON.stringify(users));
-    }, [users]);
+        localStorage.setItem('users', JSON.stringify(contacts));
+    }, [contacts]);
 
     const filteredContacts = filter
-        ? users.filter(contact =>
+        ? contacts.filter(contact =>
             contact.name && contact.name.toLowerCase().includes(filter.toLowerCase())
         )
-        : users;
+        : contacts;
 
     const handleAddUser = (newUser) => {
         const userWithId = {
             ...newUser, id: Date.now().toString(),
         };
-        setUsers(prevUsers => [...prevUsers, userWithId]);
+        setContacts(prevUsers => [...prevUsers, userWithId]);
     };
 
     const deleteUser = (userId) => {
-        setUsers(prevUsers => prevUsers.filter(user => user.id !== userId));
+        setContacts(prevUsers => prevUsers.filter(user => user.id !== userId));
     };
 
     return (
