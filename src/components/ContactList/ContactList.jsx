@@ -2,11 +2,11 @@ import React from 'react';
 import Contact from "../Contact/Contact.jsx";
 import s from "./ContactList.module.css"
 
-function ContactList({users, deleteUser}) {
+function ContactList({contacts, deleteUser}) {
     return (
         <div className={s.list}>
-            {users.map((user, index) => (
-                <Contact key={index} user={user} deleteUser={deleteUser}/>
+            {contacts.map((contact, index) => (
+                <Contact key={index} contact={contact} deleteUser={deleteUser}/>
             ))}
         </div>
     );

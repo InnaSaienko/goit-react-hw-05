@@ -1,9 +1,9 @@
 import React from 'react';
 import s from "./Contact.module.css";
 
-const Contact = ({user, deleteUser}) => {
-    const {name, number} = user;
-    console.log(user);
+const Contact = ({contact, deleteUser}) => {
+    const {name, number} = contact;
+    console.log(contact);
     return (
         <>
             <div className={s.card}>
@@ -16,7 +16,7 @@ const Contact = ({user, deleteUser}) => {
                     </div>
 
                 </div>
-                <button className={s.button} onClick={() => deleteUser(user.id)}>
+                <button className={s.button} onClick={() => deleteUser(contact.id)}>
                     <a className="waves-effect waves-light btn-small">Delete</a>
                 </button>
             </div>

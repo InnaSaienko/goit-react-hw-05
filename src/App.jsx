@@ -8,12 +8,12 @@ import s from "./App.module.css"
 
 export default function App() {
     const [contacts, setContacts] = useState(() =>
-        JSON.parse(localStorage.getItem('users')) || [])
+        JSON.parse(localStorage.getItem('contacts')) || [])
     const [filter, setFilter] = useState("");
 
     useEffect(() => {
         if (typeof window !== 'undefined') {
-            const storedUsers = JSON.parse(localStorage.getItem('users'));
+            const storedUsers = JSON.parse(localStorage.getItem('contacts'));
             if (storedUsers) {
                 setContacts(storedUsers);
             } else {
@@ -39,8 +39,8 @@ export default function App() {
         setContacts(prevUsers => [...prevUsers, userWithId]);
     };
 
-    const deleteUser = (userId) => {
-        setContacts(prevUsers => prevUsers.filter(user => user.id !== userId));
+    const deleteUser = (contactId) => {
+        setContacts(prevContacts => prevContacts.filter(contact =>contact.id !== contactId));
     };
 
     return (
@@ -48,7 +48,7 @@ export default function App() {
             <h1>Phonebook</h1>
             <ContactForm addUser={handleAddUser}/>
             <SearchBox filter={filter} setFilter={setFilter}/>
-            <ContactList users={filteredContacts} deleteUser={deleteUser}/>
+            <ContactList contacts={filteredContacts} deleteUser={deleteUser}/>
         </div>
     )
 }
