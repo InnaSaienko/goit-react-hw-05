@@ -6,7 +6,6 @@ import ContactForm from "./components/ContactForm/ContactForm.jsx";
 import {ContactData} from "./constants/ContactData.js";
 import s from "./App.module.css"
 
-
 export default function App() {
     const [users, setUsers] = useState([]);
     const [filter, setFilter] = useState("");
@@ -33,13 +32,14 @@ export default function App() {
         : users;
 
     const handleAddUser = (newUser) => {
-        setUsers(prevUsers => [...prevUsers, {...newUser}]);
+        const userWithId = {
+            ...newUser, id: Date.now().toString(),
+        };
+        setUsers(prevUsers => [...prevUsers, userWithId]);
     };
 
-    const deleteUser = (userToDelete) => {
-        setUsers(prevUsers => {
-            prevUsers.filter(user => user !== userToDelete)
-        })
+    const deleteUser = (userId) => {
+        setUsers(prevUsers => prevUsers.filter(user => user.id !== userId));
     };
 
     return (

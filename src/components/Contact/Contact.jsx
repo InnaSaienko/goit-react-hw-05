@@ -16,7 +16,7 @@ const Contact = ({user, deleteUser}) => {
                     </div>
 
                 </div>
-                <button className={s.button} onClick={() => deleteUser(user)}>
+                <button className={s.button} onClick={() => deleteUser(user.id)}>
                     <a className="waves-effect waves-light btn-small">Delete</a>
                 </button>
             </div>
