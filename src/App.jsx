@@ -12,11 +12,13 @@ export default function App() {
     const [filter, setFilter] = useState("");
 
     useEffect(() => {
-        const storedUsers = JSON.parse(localStorage.getItem('users'));
-        if (storedUsers) {
-            setUsers(storedUsers);
-        } else {
-            setUsers(ContactData);
+        if (typeof window !== 'undefined') {
+            const storedUsers = JSON.parse(localStorage.getItem('users'));
+            if (storedUsers) {
+                setUsers(storedUsers);
+            } else {
+                setUsers(ContactData);
+            }
         }
     }, []);
 
@@ -31,11 +33,13 @@ export default function App() {
         : users;
 
     const handleAddUser = (newUser) => {
-        setUsers(prevUsers => [...prevUsers, { ...newUser }]);
+        setUsers(prevUsers => [...prevUsers, {...newUser}]);
     };
 
     const deleteUser = (userToDelete) => {
-        setUsers(prevUsers => {prevUsers.filter(user => user !== userToDelete)})
+        setUsers(prevUsers => {
+            prevUsers.filter(user => user !== userToDelete)
+        })
     };
 
     return (
