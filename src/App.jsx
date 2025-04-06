@@ -20,6 +20,10 @@ export default function App() {
         }
     }, []);
 
+    useEffect(() => {
+        localStorage.setItem('users', JSON.stringify(users));
+    }, [users]);
+
     const filteredContacts = filter
         ? users.filter(contact =>
             contact.name && contact.name.toLowerCase().includes(filter.toLowerCase())
@@ -27,19 +31,11 @@ export default function App() {
         : users;
 
     const handleAddUser = (newUser) => {
-        setUsers(prevUsers => {
-            const updatedUsers = [...prevUsers, { ...newUser }];
-            localStorage.setItem('users', JSON.stringify(updatedUsers));
-            return updatedUsers;
-        });
+        setUsers(prevUsers => [...prevUsers, { ...newUser }]);
     };
 
     const deleteUser = (userToDelete) => {
-        setUsers(prevUsers => {
-            const updatedUsers = prevUsers.filter(user => user !== userToDelete);
-            localStorage.setItem('users', JSON.stringify(updatedUsers));
-            return updatedUsers;
-        });
+        setUsers(prevUsers => {prevUsers.filter(user => user !== userToDelete)})
     };
 
     return (
