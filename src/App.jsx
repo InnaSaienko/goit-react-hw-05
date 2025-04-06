@@ -1,5 +1,5 @@
 import './App.module.css';
-import {useState} from "react";
+import {useEffect, useState} from "react";
 import ContactList from "./components/ContactList/ContactList.jsx";
 import SearchBox from "./components/SearchBox/SearchBox.jsx";
 import ContactForm from "./components/ContactForm/ContactForm.jsx";
@@ -8,8 +8,17 @@ import s from "./App.module.css"
 
 
 export default function App() {
-    const [users, setUsers] = useState(ContactData);
+    const [users, setUsers] = useState([]);
     const [filter, setFilter] = useState("");
+
+    useEffect(() => {
+        const storedUsers = JSON.parse(localStorage.getItem('users'));
+        if (storedUsers) {
+            setUsers(storedUsers);
+        } else {
+            setUsers(ContactData);
+        }
+    }, []);
 
     const filteredContacts = filter
         ? users.filter(contact =>
