@@ -7,15 +7,9 @@ import {ContactData} from "./constants/ContactData.js";
 import s from "./App.module.css"
 
 export default function App() {
-    const [contacts, setContacts] = useState(ContactData);
+    const [contacts, setContacts] = useState(() =>
+        JSON.parse(localStorage.getItem('contacts')) || ContactData);
     const [filter, setFilter] = useState("");
-
-    useEffect(() => {
-        const savedContacts = JSON.parse(localStorage.getItem('contacts'));
-        if (savedContacts) {
-            setContacts(savedContacts);
-        }
-    }, []);
 
     useEffect(() => {
         localStorage.setItem('contacts', JSON.stringify(contacts));
