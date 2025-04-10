@@ -9,7 +9,7 @@ import ErrorMessage from "./components/ErrorMessage/ErrorMessage.jsx";
 import PerPageSelector from "./components/PerPageSelector/PerPageSelector.jsx";
 
 export default function App() {
-    const [query, setQuery] = useState({query: "random"});
+    const [query, setQuery] = useState("random");
     const [page, setPage] = useState(1);
     const [photosPerPage, setPhotosPerPage] = useState(10);
     const {photos, loading, error} = useFetchData(query, page,  photosPerPage);
@@ -19,6 +19,7 @@ export default function App() {
 
     const onSubmit = (query) => {
         toast.success(`Query changed to ${query}`);
+        console.log("query in onSubmit: ", query);
         setQuery(query);
         setPage(1);
         setPhotosPerPage(10);
