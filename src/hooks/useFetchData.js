@@ -8,10 +8,12 @@ const useFetchData = (query, page,  photosPerPage) => {
     const [error, setError] = useState(null);
 
     useEffect(() => {
+        const abortController = new AbortController();
+
         const getData = async () => {
             try {
                 setLoading(true);
-                const data = await fetchPhotos(query, page,  photosPerPage);
+                const data = await fetchPhotos(query, page,  photosPerPage, abortController.signal);
                 setPhotos(prev => [...prev, ...data]);
             } catch (err) {
                 toast.error('Try again later...');
@@ -22,6 +24,10 @@ const useFetchData = (query, page,  photosPerPage) => {
         };
 
         getData();
+
+        return () => {
+            abortController.abort();
+        };
     }, [query, page,  photosPerPage]);
 
     return {photos, loading, error};

@@ -4,7 +4,7 @@ const accessKey = import.meta.env.VITE_UNSPLASH_API_KEY;
 const baseUrl = import.meta.env.VITE_UNSPLASH_URL;
 const pathSearch = "/search/photos";
 
-export const fetchPhotos = async (query, page,  photosPerPage) => {
+export const fetchPhotos = async (query, page,  photosPerPage, signal) => {
     console.log("query: ", query);
     const url = new URL(pathSearch, baseUrl);
 
@@ -24,7 +24,7 @@ export const fetchPhotos = async (query, page,  photosPerPage) => {
              Authorization: `Client-ID ${accessKey}`,
              "Accept-Version": `v1`,
          }
-     });
+     }, {signal});
     console.log(response.data.results[0].id);
     return response.data.results;
 }
