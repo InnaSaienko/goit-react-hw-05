@@ -4,8 +4,8 @@
   font-family: "Roboto", sans-serif; }
 
 .main {
-  width: 100vw;
   background: #210e60;
+  min-height: 100vh;
 }
 
 .button {

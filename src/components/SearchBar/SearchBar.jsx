@@ -1,5 +1,6 @@
 import React from 'react';
-import s from "./SearchBar.module.css"
+import s from "./SearchBar.module.css";
+import stl from "../../App.module.css"
 import {ErrorMessage, Field, Form, Formik} from "formik";
 import * as Yup from 'yup';
 
@@ -35,7 +36,7 @@ function SearchBar({onSubmit}) {
                            style={{ fontSize: '18px', padding: '10px' }}
                            placeholder="Search images and photos..."/>
                     <ErrorMessage name="query" component="span" className={s.errorMessage}/>
-                    <button type="submit" className={s.button}>Search</button>
+                    <button type="submit" className={stl.button}>Search</button>
                 </Form>
             </Formik>
         </header>
