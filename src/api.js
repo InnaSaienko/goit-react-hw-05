@@ -5,7 +5,8 @@ const baseUrl = import.meta.env.VITE_UNSPLASH_URL;
 const pathSearch = "/search/photos";
 
 export const fetchPhotos = async (query, page, photosPerPage, signal) => {
-    console.log("query: ", query);
+    console.log("query: ", query, "pathSearch: ", pathSearch, "baseUrl: ", baseUrl);
+
     const url = new URL(pathSearch, baseUrl);
     console.log("url sub: ", url);
     if (query) {
