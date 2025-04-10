@@ -1,10 +1,22 @@
-.list {
-    border: 2px solid  #63529a;
-    border-radius: 8px;
-    padding: 10px;
-    width: 60vw;
+.gallery {
     display: grid;
-    grid-template-columns: repeat(3, 1fr);
-    gap: 5px;
-    margin-top: 20px;
+    grid-template-columns: repeat(6, 1fr);
+    gap: 30px;
+    padding: 5%;
+    box-sizing: border-box;
+    width: 100%;
+    max-width: 100%;
+    overflow-x: hidden;
+}
+
+@media (max-width: 1200px) {
+    .gallery {
+        grid-template-columns: repeat(4, 1fr);
+    }
+}
+
+@media (max-width: 992px) {
+    .gallery {
+        grid-template-columns: repeat(3, 1fr);
+    }
 }

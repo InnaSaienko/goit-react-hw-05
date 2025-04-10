@@ -1,25 +1,25 @@
-import React from 'react';
+import React, {useState} from 'react';
 import s from "./ImageCard.module.css";
+import ImageModal from "../ImageModal/ImageModal.jsx";
 
-const ImageCard = ({contact, deleteUser}) => {
-    const {name, number} = contact;
-    console.log(contact);
+const ImageCard = ({photo}) => {
+    const {urls, alt_description, user, created_at: date} = photo;
+    const [isModalOpen, setIsModalOpen] = useState(false);
+
     return (
         <>
-            <div className={s.card}>
-                <div className={s.cardContent}>
-                    <div className={s.cardName}>
-                        <p>{name}</p>
-                    </div>
-                    <div className={s.cardNumber}>
-                        <p>{number}</p>
-                    </div>
-
+            <div className={s.g_item} onClick={() => setIsModalOpen(true)} >
+                <img className={s.g_item__img} src={urls.small} alt={alt_description}/>
+                <div className={s.g_item__title}>
+                    <span className={s.g_item__author}>{user.first_name}</span>
+                    <span className={s.g_item__date}>{date}</span>
                 </div>
-                <button className={s.button} onClick={() => deleteUser(contact.id)}>
-                    <a className="waves-effect waves-light btn-small">Delete</a>
-                </button>
             </div>
+            {isModalOpen && (<ImageModal
+                onClose={() => setIsModalOpen(false)}
+                image={urls.regular}
+                name={user.name}
+                alt={alt_description}/>)}
         </>
     );
 };

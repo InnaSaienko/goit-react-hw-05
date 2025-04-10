@@ -1,6 +1,30 @@
-export const UseFetchData = [
-    {id: 'id-1', name: 'Rosie Simpson', number: '459-12-56'},
-    {id: 'id-2', name: 'Hermione Kline', number: '443-89-12'},
-    {id: 'id-3', name: 'Eden Clements', number: '645-17-79'},
-    {id: 'id-4', name: 'Annie Copeland', number: '227-91-26'},
-]
+import {useEffect, useState} from "react";
+import {fetchPhotos} from "../api.js";
+import toast from 'react-hot-toast';
+
+const useFetchData = (query, page) => {
+    const [photos, setPhotos] = useState([]);
+    const [loading, setLoading] = useState(false);
+    const [error, setError] = useState(null);
+
+    useEffect(() => {
+        const getData = async () => {
+            try {
+                setLoading(true);
+                const data = await fetchPhotos(query, page);
+                setPhotos(prev => [...prev, ...data]);
+            } catch (err) {
+                toast.error('Try again later...');
+                setError(err);
+            } finally {
+                setLoading(false);
+            }
+        };
+
+        getData();
+    }, [query, page]);
+
+    return {photos, loading, error};
+};
+
+export default useFetchData;

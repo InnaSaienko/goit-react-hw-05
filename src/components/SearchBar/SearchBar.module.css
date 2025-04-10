@@ -1,16 +1,33 @@
+
 .searchBox {
-    display: flex;
-    flex-direction: column;
-    border: 2px solid  #63529a;
+    border: 2px solid #63529a;
     border-radius: 8px;
-    padding: 10px;
+    padding: 30px;
     margin-top: 20px;
-    width: 40vw;
 }
+
+.form {
+    width: 40vw;
+    display: flex;
+    justify-content: space-between;
+    gap: 20px;
+    margin: 0 auto;
+}
+
 .input {
     width: 100%;
-    padding: 8px;
-    margin-bottom: 20px;
-    border: 1px solid #ccc;
+    padding: 10px;
     border-radius: 4px;
+}
+
+.button {
+    cursor: pointer;
+    outline: 0;
+    padding: 10px;
+    user-select: none;
+    font-size: 18px;
+    border-radius: 4px;
+    transition: all 0.2s ease-in-out;
+    color: #63529a;
+    background: white;
 }

@@ -1,20 +1,14 @@
 import React from 'react';
 import ImageCard from "../ImageCard/ImageCard.jsx";
 import s from "./ImageGallery.module.css"
-import Loader from "../Loader/Loader.jsx";
 
-function ImageGallery() {
-
-    if (loading) { return <Loader />; }
-    // if (error) return <p>Error: {error}</p>;
-
+const ImageGallery = ({photos}) =>  {
     return (
-        <ul className={s.list}>
-            {contacts.map((contact, index) => (
-                <ImageCard key={index} contact={contact} deleteUser={deleteUser}/>
+        <ul className={s.gallery}>
+            {photos.map((photo, index) => (
+                <ImageCard key={index} photo={photo} />
             ))}
         </ul>
-    );
-}
+    );}
 
 export default ImageGallery;

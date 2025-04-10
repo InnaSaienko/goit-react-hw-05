@@ -1,23 +1,35 @@
-import './App.module.css';
-import {use, useEffect, useState} from "react";
-import ImageGallery from "./components/ImageGallery/ImageGallery.jsx";
+import s from "./App.module.css"
 import SearchBar from "./components/SearchBar/SearchBar.jsx";
 import Loader from "./components/Loader/Loader.jsx";
-import {UseFetchData} from "./hooks/useFetchData.js";
-import s from "./App.module.css"
+import ImageGallery from "./components/ImageGallery/ImageGallery.jsx";
+import useFetchData from "./hooks/useFetchData.js";
+import {useState} from "react";
+import toast from "react-hot-toast";
+import ErrorMessage from "./components/ErrorMessage/ErrorMessage.jsx";
 
 export default function App() {
-    const [search, setSearch] = useState("");
+    const [query, setQuery] = useState({query: "random"});
+    const [page, setPage] = useState(1);
+    const {photos, loading, error} = useFetchData(query, page);
 
-    const onSubmit = (searchThema) => {
-        setSearch(searchThema);
+    if (loading) return <Loader/>;
+    if (error) return <ErrorMessage err={error}/>
+
+    const onSubmit = (query) => {
+        toast.success(`Query changed to ${query}`);
+        setQuery(query);
+        useFetchData(query);
+    };
+
+    const handleLoadMore = () => {
+        setPage(page + 1);
     };
 
     return (
         <div className={s.main}>
-            {/*<Loader addUser={handleAddUser}/>*/}
             <SearchBar onSubmit={onSubmit}/>
-            {/*<ImageGallery contacts={filteredContacts} deleteUser={deleteUser}/>*/}
+            <ImageGallery photos={photos}/>
+            <button className={s.button} onClick={handleLoadMore} style={{margin: '0 auto'}}>Load More</button>
         </div>
     )
 }
