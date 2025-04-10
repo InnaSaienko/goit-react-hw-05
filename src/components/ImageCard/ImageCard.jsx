@@ -3,7 +3,7 @@ import s from "./ImageCard.module.css";
 import ImageModal from "../ImageModal/ImageModal.jsx";
 
 const ImageCard = ({photo}) => {
-    const {urls, alt_description, user, created_at} = photo;
+    const {urls, alt_description, user, created_at, description} = photo;
     const [isModalOpen, setIsModalOpen] = useState(false);
     let date = new Date(created_at);
     let day = date.getDate();
@@ -18,8 +18,7 @@ const ImageCard = ({photo}) => {
     };
 
 
-    return (
-        <>
+    return (<>
             <div className={s.g_item} onClick={() => setIsModalOpen(true)}>
                 <img className={s.g_item__img} src={urls.small} alt={alt_description}/>
                 <div className={s.g_item__title}>
@@ -31,9 +30,10 @@ const ImageCard = ({photo}) => {
                 onClose={() => setIsModalOpen(false)}
                 image={urls.regular}
                 name={user.name}
-                alt={alt_description}/>)}
-        </>
-    );
+                alt={alt_description}
+                description={description}/>)}
+                </>)
 };
+
 
 export default ImageCard;

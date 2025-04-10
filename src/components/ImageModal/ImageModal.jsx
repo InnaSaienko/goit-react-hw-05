@@ -2,7 +2,7 @@ import React from 'react';
 import s from "./ImageModal.module.css";
 import Modal from 'react-modal';
 
-const ImageModal = ({onClose, image, name, alt}) => {
+const ImageModal = ({onClose, image, alt, description}) => {
     const customStyles = {
         content: {
             width: "60vw",
@@ -13,6 +13,8 @@ const ImageModal = ({onClose, image, name, alt}) => {
             bottom: 'auto',
             marginRight: '-50%',
             transform: 'translate(-50%, -50%) scale(1)',
+            background: "transparent",
+            border: "none",
         },
     };
 
@@ -28,7 +30,7 @@ const ImageModal = ({onClose, image, name, alt}) => {
         >
             <div className={s.popupClose} onClick={onClose}></div>
             <div className={s.popupContent}>
-                <span>`Photo made by: &{name}`</span>
+                <span className={s.description}>{description}</span>
                 <div className={s.popupImage}>
                     <img src={image} alt={alt} />
                 </div>
