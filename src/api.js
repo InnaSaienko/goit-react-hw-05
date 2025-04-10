@@ -9,8 +9,10 @@ export const fetchPhotos = async (query, page, photosPerPage, signal) => {
     const url = new URL(pathSearch, baseUrl);
 
     if (query) {
-        url.searchParams.set("orientation", "landscape");
+        // url.searchParams.set("orientation", "landscape");
+        console.log("url sub: ", url);
         url.searchParams.set("query", query);
+        console.log("url sub after: ", url);
     }
     url.searchParams.set("per_page", photosPerPage);
     url.searchParams.set("page", page);
