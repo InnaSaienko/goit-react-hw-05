@@ -15,6 +15,7 @@ const ImageModal = ({onClose, image, alt, description}) => {
             transform: 'translate(-50%, -50%) scale(1)',
             background: "transparent",
             border: "none",
+            overflow: "hidden",
         },
     };
 
