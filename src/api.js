@@ -15,7 +15,7 @@ export const fetchPhotos = async (query, page, photosPerPage, signal) => {
     url.searchParams.set("per_page", photosPerPage);
     url.searchParams.set("page", page);
     console.log("url: ", url);
-    const response = await axios.get(url, {
+    const response = await axios.get(url.toString(), {
         headers: {
             Authorization: `Client-ID ${accessKey}`,
             "Accept-Version": `v1`,
