@@ -9,22 +9,19 @@ export const fetchPhotos = async (query, page,  photosPerPage, signal) => {
     const url = new URL(pathSearch, baseUrl);
 
     if (query) {
-        for (const [key, value] of Object.entries(query)) {
-
             url.searchParams.set("orientation", "landscape");
-            url.searchParams.set(key, String(value));
-        }
+            url.searchParams.set("query", query);
     }
     url.searchParams.set("per_page",  photosPerPage);
     url.searchParams.set("page", page);
-    console.log(" photosPerPage: ", photosPerPage);
-    console.log("URL:", url);
+    // console.log(" photosPerPage: ", photosPerPage);
+    // console.log("URL:", url);
      const response = await axios.get(url, {
          headers: {
              Authorization: `Client-ID ${accessKey}`,
              "Accept-Version": `v1`,
          }
      }, {signal});
-    console.log(response.data.results[0].id);
+    // console.log(response.data.results[0].id);
     return response.data.results;
 }

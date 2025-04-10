@@ -29,7 +29,6 @@ export default function App() {
     };
 
     const handlePerPage = (perPage) => {
-        console.log("perPage was changed: ", perPage);
         setPhotosPerPage(perPage);
     };
 

@@ -19,7 +19,7 @@ function SearchBar({onSubmit}) {
             alert('Please enter text to search for images.');
 
         } else {
-            onSubmit(values);
+            onSubmit(values.query);
         }
         actions.resetForm();
     };

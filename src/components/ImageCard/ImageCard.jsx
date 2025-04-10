@@ -12,8 +12,6 @@ const ImageCard = ({photo}) => {
     let year = date.getFullYear();
     let formattedDate = `${day} ${month} ${year}`;
 
-    console.log("user: ", user);
-
     const formattedName = (name) => {
         return name.split(' ').map(word => {
             return word.charAt(0).toUpperCase() + word.slice(1).toLowerCase();
