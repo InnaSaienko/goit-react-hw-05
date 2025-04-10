@@ -6,11 +6,13 @@ import useFetchData from "./hooks/useFetchData.js";
 import {useState} from "react";
 import toast from "react-hot-toast";
 import ErrorMessage from "./components/ErrorMessage/ErrorMessage.jsx";
+import PerPageSelector from "./components/PerPageSelector/PerPageSelector.jsx";
 
 export default function App() {
     const [query, setQuery] = useState({query: "random"});
     const [page, setPage] = useState(1);
-    const {photos, loading, error} = useFetchData(query, page);
+    const [photosPerPage, setPhotosPerPage] = useState(10);
+    const {photos, loading, error} = useFetchData(query, page,  photosPerPage);
 
     if (loading) return <Loader/>;
     if (error) return <ErrorMessage err={error}/>
@@ -18,18 +20,25 @@ export default function App() {
     const onSubmit = (query) => {
         toast.success(`Query changed to ${query}`);
         setQuery(query);
-        useFetchData(query);
+        setPage(1);
+        setPhotosPerPage(10);
     };
 
     const handleLoadMore = () => {
         setPage(page + 1);
     };
 
+    const handlePerPage = (perPage) => {
+        console.log("perPage was changed: ", perPage);
+        setPhotosPerPage(perPage);
+    };
+
     return (
         <div className={s.main}>
             <SearchBar onSubmit={onSubmit}/>
+            <PerPageSelector perPage={photosPerPage} onChange={handlePerPage}/>
             <ImageGallery photos={photos}/>
-            <button className={s.button} onClick={handleLoadMore} style={{margin: '0 auto'}}>Load More</button>
+            <button className={s.button} onClick={handleLoadMore} style={{display: 'flex', margin: '0 auto'}}>Load More</button>
         </div>
     )
 }
