@@ -19,8 +19,10 @@ export const fetchPhotos = async (query, page, photosPerPage, signal) => {
         headers: {
             Authorization: `Client-ID ${accessKey}`,
             "Accept-Version": `v1`,
-        }
-    }, {signal});
+        },
+        signal,
+    });
+
     console.log("response: ", response.data.results);
     return response.data.results;
 }
