@@ -5,7 +5,7 @@ import ImageModal from "../ImageModal/ImageModal.jsx";
 const ImageCard = ({photo}) => {
     const {urls, alt_description, user, created_at} = photo;
     const [isModalOpen, setIsModalOpen] = useState(false);
-
+    console.log("created_at: ", created_at);
     let date = new Date(created_at);
     let day = date.getDate();
     let month = date.toLocaleString('default', {month: 'short'});
