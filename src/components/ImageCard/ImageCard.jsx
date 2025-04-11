@@ -17,8 +17,8 @@ const ImageCard = ({photo, onClick}) => {
 
 
     return (<>
-            <div className={s.g_item} onClick={onClick}>
-                <img className={s.g_item__img} src={urls.small} alt={alt_description}/>
+            <div className={s.g_item}>
+                <img className={s.g_item__img} src={urls.small} onClick={onClick} alt={alt_description}/>
                 <div className={s.g_item__title}>
                     <span className={s.g_item__author}>{formattedName(user.first_name)}</span>
                     <span className={s.g_item__date}>{formattedDate}</span>
