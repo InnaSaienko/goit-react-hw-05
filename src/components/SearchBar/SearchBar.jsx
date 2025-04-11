@@ -3,6 +3,7 @@ import s from "./SearchBar.module.css";
 import stl from "../../App.module.css"
 import {ErrorMessage, Field, Form, Formik} from "formik";
 import * as Yup from 'yup';
+import toast from "react-hot-toast";
 
 function SearchBar({onSubmit}) {
     const initialValues = {
@@ -10,14 +11,12 @@ function SearchBar({onSubmit}) {
     };
     const validationSchema = Yup.object({
         query: Yup.string()
-            .required("Please enter text to search for images.")
             .min(3, "Query must be at least 3 characters long."),
     });
     const handleSubmit = (values, actions) => {
         console.log("values: ", values);
         if (values.query === '') {
-            alert('Please enter text to search for images.');
-
+            toast.error('Please enter text to search for images.');
         } else {
             onSubmit(values.query);
         }
