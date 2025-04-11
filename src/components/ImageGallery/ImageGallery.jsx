@@ -1,16 +1,8 @@
-import React, {useState} from 'react';
+import React from 'react';
 import ImageCard from "../ImageCard/ImageCard.jsx";
-import ImageModal from "../ImageModal/ImageModal.jsx";
 import s from "./ImageGallery.module.css"
 
-
-const ImageGallery = ({photos}) => {
-    const [selectedPhoto, setSelectedPhoto] = useState(null);
-
-    const handleImageClick = (photo) => {
-        setSelectedPhoto(photo);
-    }
-    const closeModal = () => setSelectedPhoto(null);
+const ImageGallery = ({photos, onSelect}) => {
     return (
             <>
                 <ul className={s.gallery}>
@@ -18,14 +10,10 @@ const ImageGallery = ({photos}) => {
                         <ImageCard
                             key={index}
                             photo={photo}
-                            onClick={() => handleImageClick(photo)}
+                            onClick={() => onSelect(photo)}
                         />
                     ))}
                 </ul>
-                {selectedPhoto && (<ImageModal
-                    onClose={closeModal}
-                    photo={selectedPhoto}
-                />)}
         </>
     )
 }

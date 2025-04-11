@@ -15,7 +15,6 @@ const ImageCard = ({photo, onClick}) => {
         }).join(' ');
     };
 
-
     return (<>
             <div className={s.g_item}>
                 <img className={s.g_item__img} src={urls.small} onClick={onClick} alt={alt_description}/>
