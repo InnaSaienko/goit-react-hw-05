@@ -13,14 +13,10 @@ export default function App() {
     const [query, setQuery] = useState("random");
     const [page, setPage] = useState(1);
     const [photosPerPage, setPhotosPerPage] = useState(10);
-    const {photos, loading, error} = useFetchData(query, page,  photosPerPage);
-
-    if (loading) return <Loader/>;
-    if (error) return <ErrorMessage err={error}/>
+    const {photos, loading, error} = useFetchData(query, page, photosPerPage);
 
     const onSubmit = (query) => {
         toast.success(`Query changed to ${query}`);
-        console.log("query in onSubmit: ", query);
         setQuery(query);
         setPage(1);
         setPhotosPerPage(10);
@@ -38,8 +34,11 @@ export default function App() {
         <div className={s.main}>
             <SearchBar onSubmit={onSubmit}/>
             <PerPageSelector perPage={photosPerPage} onChange={handlePerPage}/>
-            <ImageGallery photos={photos}/>
-            <LoadMoreBtn onClick={handleLoadMore} />
+            {loading ? (<Loader/>) : error ? (<ErrorMessage/>) :
+                (<ImageGallery photos={photos}/>)
+            }
+
+            {photos && (<LoadMoreBtn onClick={handleLoadMore}/>)}
         </div>
     )
 }
