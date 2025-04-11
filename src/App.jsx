@@ -7,6 +7,7 @@ import {useState} from "react";
 import toast from "react-hot-toast";
 import ErrorMessage from "./components/ErrorMessage/ErrorMessage.jsx";
 import PerPageSelector from "./components/PerPageSelector/PerPageSelector.jsx";
+import LoadMoreBtn from "./components/LoadMoreBtn/LoadMoreBtn.jsx";
 
 export default function App() {
     const [query, setQuery] = useState("random");
@@ -38,7 +39,7 @@ export default function App() {
             <SearchBar onSubmit={onSubmit}/>
             <PerPageSelector perPage={photosPerPage} onChange={handlePerPage}/>
             <ImageGallery photos={photos}/>
-            <button className={s.button} onClick={handleLoadMore} style={{display: 'flex', margin: '0 auto'}}>Load More</button>
+            <LoadMoreBtn onClick={handleLoadMore} />
         </div>
     )
 }
