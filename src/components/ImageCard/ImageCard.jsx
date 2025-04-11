@@ -1,10 +1,8 @@
-import React, {useState} from 'react';
+import React from 'react';
 import s from "./ImageCard.module.css";
-import ImageModal from "../ImageModal/ImageModal.jsx";
 
-const ImageCard = ({photo}) => {
-    const {urls, alt_description, user, created_at, description} = photo;
-    const [isModalOpen, setIsModalOpen] = useState(false);
+const ImageCard = ({photo, onClick}) => {
+    const {urls, alt_description, user, created_at} = photo;
     let date = new Date(created_at);
     let day = date.getDate();
     let month = date.toLocaleString('default', {month: 'short'});
@@ -19,20 +17,14 @@ const ImageCard = ({photo}) => {
 
 
     return (<>
-            <div className={s.g_item} onClick={() => setIsModalOpen(true)}>
+            <div className={s.g_item} onClick={onClick}>
                 <img className={s.g_item__img} src={urls.small} alt={alt_description}/>
                 <div className={s.g_item__title}>
                     <span className={s.g_item__author}>{formattedName(user.first_name)}</span>
                     <span className={s.g_item__date}>{formattedDate}</span>
                 </div>
             </div>
-            {isModalOpen && (<ImageModal
-                onClose={() => setIsModalOpen(false)}
-                image={urls.regular}
-                name={user.name}
-                alt={alt_description}
-                description={description}/>)}
-                </>)
+        </>)
 };
 
 
