@@ -1,50 +1,75 @@
-import s from "./App.module.css"
+import s from "./App.module.css";
+import {useEffect, useState} from "react";
+import toast from "react-hot-toast";
+import {fetchPhotos} from "./hooks/api.js";
 import SearchBar from "./components/SearchBar/SearchBar.jsx";
 import Loader from "./components/Loader/Loader.jsx";
-import ImageGallery from "./components/ImageGallery/ImageGallery.jsx";
-import useFetchData from "./hooks/useFetchData.js";
-import {useState} from "react";
-import toast from "react-hot-toast";
 import ErrorMessage from "./components/ErrorMessage/ErrorMessage.jsx";
+import ImageGallery from "./components/ImageGallery/ImageGallery.jsx";
 import PerPageSelector from "./components/PerPageSelector/PerPageSelector.jsx";
 import LoadMoreBtn from "./components/LoadMoreBtn/LoadMoreBtn.jsx";
 import ImageModal from "./components/ImageModal/ImageModal.jsx";
 
 export default function App() {
-    const [query, setQuery] = useState("random");
+    const [photos, setPhotos] = useState([]);
+    const [loading, setLoading] = useState(false);
+    const [error, setError] = useState(null);
+    const [query, setQuery] = useState("");
     const [page, setPage] = useState(1);
-    const [photosPerPage, setPhotosPerPage] = useState(10);
-    const {photos, loading, error} = useFetchData(query, page, photosPerPage);
+    const [perPage, setPerPage] = useState(10);
     const [selectedPhoto, setSelectedPhoto] = useState(null);
     const closeModal = () => setSelectedPhoto(null);
+
+    useEffect(() => {
+        const abortController = new AbortController();
+        if (!query) return;
+        const getPhotos = async () => {
+            try {
+                setLoading(true);
+                const data = await fetchPhotos(query, page,  perPage, abortController.signal);
+                setPhotos(prev => [...prev, ...data]);
+            } catch (err) {
+                toast.error('Try again later...');
+                setError(err);
+            } finally {
+                setLoading(false);
+            }
+        };
+
+        getPhotos();
+
+        return () => {
+            abortController.abort();
+        };
+    }, [query, page, perPage]);
 
     const onSubmit = (query) => {
         toast.success(`Query changed to ${query}`);
         setQuery(query);
+        setPhotos([]);
         setPage(1);
-        setPhotosPerPage(10);
+        setPerPage(10);
     };
-
     const handleLoadMore = () => {setPage(page + 1);};
-
-    const handlePerPage = (perPage) => {
-        setPhotosPerPage(perPage);
-    };
-    const handleSelectedPhoto = (select) =>  {
-        setSelectedPhoto(select)
-    };
+    const handlePerPage = (perPage) => {setPerPage(perPage);};
+    const handleSelectedPhoto = (select) =>  {setSelectedPhoto(select)};
 
     return (
         <div className={s.main}>
             <SearchBar onSubmit={onSubmit}/>
-            <PerPageSelector perPage={photosPerPage} onChange={handlePerPage}/>
-            {loading ? (<Loader/>) : error ? (<ErrorMessage/>) :
-                (<ImageGallery photos={photos} onSelect={handleSelectedPhoto}/>)
-            }
-            {selectedPhoto && (
-                <ImageModal photo={selectedPhoto} onClose={closeModal} />
+            {loading && <Loader/>}
+            {error && <ErrorMessage/>}
+            {photos.length > 0 && !loading && !error && (
+                <>
+                    <PerPageSelector perPage={perPage} onChange={handlePerPage}/>
+                    <ImageGallery photos={photos} onSelect={handleSelectedPhoto}/>
+                    <LoadMoreBtn onClick={handleLoadMore}/>
+                </>
+
             )}
-            {photos && (<LoadMoreBtn onClick={handleLoadMore}/>)}
+            {selectedPhoto && (
+            <ImageModal photo={selectedPhoto} onClose={closeModal} />
+        )}
         </div>
     )
 }
