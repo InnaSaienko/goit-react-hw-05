@@ -30,7 +30,6 @@ export default function App() {
             try {
                 setLoading(true);
                 const data = await useFetchPhotos(query, page,  perPage, abortController.signal);
-                console.log("after receive response: ", "query: ", query, "page", page, "perPage", perPage);
                 setPhotos(prev => page === 1 ? data : [...prev, ...data]);
             } catch (err) {
                 toast.error('Try again later...');

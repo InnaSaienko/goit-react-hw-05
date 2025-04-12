@@ -14,7 +14,6 @@ function SearchBar({onSubmit}) {
             .min(3, "Query must be at least 3 characters long."),
     });
     const handleSubmit = (values, actions) => {
-        console.log("values: ", values);
         if (values.query === '') {
             toast.error('Please enter text to search for images.');
         } else {

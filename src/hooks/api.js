@@ -13,7 +13,6 @@ export const useFetchPhotos = async (query, page, photosPerPage, signal) => {
     }
    url.searchParams.set("per_page", photosPerPage);
     url.searchParams.set("page", page);
-    console.log("Url with updated query", url.href);
     const response = await axios.get(url.toString(), {
         headers: {
             Authorization: `Client-ID ${accessKey}`,
@@ -21,6 +20,5 @@ export const useFetchPhotos = async (query, page, photosPerPage, signal) => {
         },
         signal,
     });
-    console.log("response came");
     return response.data.results;
 }
