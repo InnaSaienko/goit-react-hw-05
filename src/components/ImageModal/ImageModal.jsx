@@ -33,9 +33,9 @@ const ImageModal = ({onClose, photo}) => {
         >
             <div className={s.popupClose} onClick={onClose}></div>
             <div className={s.popupContent}>
-                <span className={s.description}>{description}</span>
+                <span className={s.description}>{description || alt_description.charAt(0).toUpperCase() || "No description available"}</span>
                 <div className={s.popupImage}>
-                    <img src={image} alt={alt_description} />
+                    <img src={image} alt={alt_description}/>
                 </div>
             </div>
         </Modal>
