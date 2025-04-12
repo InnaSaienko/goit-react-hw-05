@@ -1,15 +1,19 @@
 .searchBox {
-    border: 2px solid #63529a;
-    border-radius: 8px;
-    padding: 30px;
-}
-
-.form {
-    width: 40vw;
     display: flex;
-    justify-content: space-between;
-    gap: 20px;
+    flex-direction: column;
+    align-items: center;
     margin: 0 auto;
+    padding: 30px;
+
+    & .form {
+        width: 40vw;
+        display: flex;
+        justify-content: space-between;
+        gap: 20px;
+        border: 2px solid #63529a;
+        border-radius: 8px;
+        padding: 30px;
+    }
 }
 
 .input {
