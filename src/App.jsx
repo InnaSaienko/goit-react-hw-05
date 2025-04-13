@@ -5,7 +5,7 @@ import {useFetchPhotos} from "./hooks/api.js";
 import SearchBar from "./components/SearchBar/SearchBar.jsx";
 import Loader from "./components/Loader/Loader.jsx";
 import ErrorMessage from "./components/ErrorMessage/ErrorMessage.jsx";
-import ImageGallery from "./components/ImageGallery/ImageGallery.jsx";
+import MoviesPage from "./pages/MoviesPage/MoviesPage.jsx";
 import PerPageSelector from "./components/PerPageSelector/PerPageSelector.jsx";
 import LoadMoreBtn from "./components/LoadMoreBtn/LoadMoreBtn.jsx";
 import ImageModal from "./components/ImageModal/ImageModal.jsx";
@@ -81,7 +81,7 @@ export default function App() {
             {photos.length > 0 && !loading && !error && (
                 <>
                     <PerPageSelector perPage={searchParams.perPage} onChange={handlePerPage}/>
-                    <ImageGallery photos={photos} onSelect={handleSelectedPhoto}/>
+                    <MoviesPage photos={photos} onSelect={handleSelectedPhoto}/>
                     <LoadMoreBtn onClick={handleLoadMore}/>
                 </>
 

@@ -1,13 +1,13 @@
 import React from 'react';
-import ImageCard from "../ImageCard/ImageCard.jsx";
-import s from "./ImageGallery.module.css"
+import MovieCast from "../../components/MovieCast/MovieCast.jsx";
+import s from "./MoviesPage.css"
 
-const ImageGallery = ({photos, onSelect}) => {
+const MoviesPage = ({photos, onSelect}) => {
     return (
             <>
                 <ul className={s.gallery}>
                     {photos.map((photo, index) => (
-                        <ImageCard
+                        <MovieCast
                             key={index}
                             photo={photo}
                             onClick={() => onSelect(photo)}
@@ -18,4 +18,4 @@ const ImageGallery = ({photos, onSelect}) => {
     )
 }
 
-export default ImageGallery;
+export default MoviesPage;

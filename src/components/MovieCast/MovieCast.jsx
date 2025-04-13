@@ -1,9 +1,10 @@
 import React from 'react';
-import s from "./ImageCard.module.css";
+import s from "./MovieCast.module.css";
 import {formattedDate, formattedName} from "../../utils/utils.js";
 
-const ImageCard = ({photo, onClick}) => {
-    const {urls, alt_description, user, created_at} = photo;
+const MovieCast = ({photo, onClick}) => {
+    const {urls, alt_description, user, created_at} = photo;MovieCast
+    
 
     return (<>
             <div className={s.g_item}>
@@ -17,4 +18,4 @@ const ImageCard = ({photo, onClick}) => {
 };
 
 
-export default ImageCard;
+export default MovieCast;
