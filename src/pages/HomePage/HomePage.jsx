@@ -12,8 +12,7 @@ const HomePage = () => {
         language: "en-US",
     });
    const { movies, loading, error } = useFetchMovies(searchParams);
-
-   return (
+  return (
         <div>
             <h1>Home</h1>
             {error && <p>{error}</p>}
@@ -21,7 +20,7 @@ const HomePage = () => {
                 <p>Loading movies...</p>
             ) : (
                 <Suspense fallback={<Loader/>}>
-                    <MovieList movies={movies} />
+                    <MovieList movies={movies.results} />
                 </Suspense>
             )}
         </div>

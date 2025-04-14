@@ -13,7 +13,6 @@ export const useFetchMovies = (searchParams) => {
                 const controller = new AbortController();
                 const {endPointPath, ...queryParams} = searchParams;
                 const url = new URL(endPointPath, baseUrl);
-                console.log("url after new URL: ", url);
                 const searchParamsRest = new URLSearchParams(queryParams);
                 url.search = searchParamsRest.toString();
                 const options = {
@@ -26,7 +25,7 @@ export const useFetchMovies = (searchParams) => {
                 console.log("url finally: ", url);
                 axios.get(url.toString(), options)
                     .then(response => {
-                        setMovies(response.data.results);
+                        setMovies(response.data);
                         setLoading(false);
                     })
                     .catch(err => {
@@ -37,7 +36,7 @@ export const useFetchMovies = (searchParams) => {
 
             }, [searchParams]
         );
-
+        console.log("response good");
         return {movies, loading, error};
     }
 ;

@@ -4,11 +4,7 @@ export const formattedName = (name) => {
     }).join(' ');
 };
 
-export const formattedDate = (str) => {
-    let date = new Date(str);
-    let day = date.getDate();
-    let month = date.toLocaleString('default', {month: 'short'});
-    let year = date.getFullYear();
-
-    return `${day} ${month} ${year}`;
-}
+export const getFullImageUrl = (backdropPath) => {
+    if (!backdropPath) return null;
+    return `https://image.tmdb.org/t/p/w500${backdropPath}`;
+};
