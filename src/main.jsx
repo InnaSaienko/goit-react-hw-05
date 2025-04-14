@@ -1,10 +1,11 @@
 import React from "react";
+import {createRoot} from "react-dom/client";
+import {createBrowserRouter, Outlet, RouterProvider} from "react-router-dom";
 import './index.css';
 import Navigation from "./components/Navigation/Navigation.jsx";
-import {createBrowserRouter, Outlet, RouterProvider} from "react-router-dom";
-import MoviesPage from "./pages/MoviesPage/MoviesPage.jsx";
 import HomePage from "./pages/HomePage/HomePage.jsx";
-import {createRoot} from "react-dom/client";
+import MovieDetailsPage from "./components/MovieDetailsPage/MovieDetailsPage.jsx";
+import MoviesPage from "./pages/MoviesPage/MoviesPage.jsx";
 
 const Layout = () => {
     return (
@@ -27,7 +28,11 @@ const router = createBrowserRouter([{
         },
         {
             path: '/movies',
-            element: <MoviesPage/>
+            element: <MoviesPage/>,
+        },
+        {
+            path: 'movies/:id',
+            element: <MovieDetailsPage/>
         },
     ]
 }])
