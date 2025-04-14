@@ -1,20 +1,11 @@
 import React from 'react';
-import MovieCast from "../../components/MovieCast/MovieCast.jsx";
-import s from "./MoviesPage.css"
+// import s from "./MoviesPage.module.css"
 
-const MoviesPage = ({photos, onSelect}) => {
+const MoviesPage = () => {
     return (
-            <>
-                <ul className={s.gallery}>
-                    {photos.map((photo, index) => (
-                        <MovieCast
-                            key={index}
-                            photo={photo}
-                            onClick={() => onSelect(photo)}
-                        />
-                    ))}
-                </ul>
-        </>
+            <div>
+               Movie
+        </div>
     )
 }
 

@@ -1,17 +1,17 @@
 {
-  "name": "goit-react-hw-04",
+  "name": "goit-react-hw-05",
   "version": "1.0.0",
-  "description": "Phonebook",
+  "description": "Movie search",
   "keywords": [
     "Delft1980"
   ],
-  "homepage": "https://github.com/InnaSaienko/goit-react-hw-03#readme",
+  "homepage": "https://github.com/InnaSaienko/goit-react-hw-05#readme",
   "bugs": {
-    "url": "https://github.com/InnaSaienko/goit-react-hw-03/issues"
+    "url": "https://github.com/InnaSaienko/goit-react-hw-05/issues"
   },
   "repository": {
     "type": "git",
-    "url": "git+https://github.com/InnaSaienko/goit-react-hw-03.git"
+    "url": "git+https://github.com/InnaSaienko/goit-react-hw-05.git"
   },
   "license": "ISC",
   "author": "InnaSaienko",
@@ -30,11 +30,11 @@
     "eslint-plugin-react-hooks": "^5.2.0",
     "eslint-plugin-react-refresh": "^0.4.19",
     "formik": "^2.4.6",
-    "react": "^17.0.2",
-    "react-dom": "^17.0.2",
+    "react": "^19.1.0",
+    "react-dom": "^19.1.0",
     "react-hot-toast": "^2.5.2",
-    "react-materialize": "^3.10.0",
     "react-modal": "^3.16.3",
+    "react-router-dom": "^7.5.0",
     "yup": "^1.6.1"
   },
   "devDependencies": {
