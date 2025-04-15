@@ -67,7 +67,6 @@ const MovieDetailsPage = () => {
                             )}
                         </div>
                     </ul>
-
                     <Outlet/>
                 </div>
             )

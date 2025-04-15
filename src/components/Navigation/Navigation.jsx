@@ -1,16 +1,22 @@
 import React from 'react';
 import s from "./Navigation.module.css";
-import {Link} from "react-router-dom";
+import { NavLink} from "react-router-dom";
+import clsx from "clsx";
 
 const menu = [{name: "HOME", link: "/"}, {name: "MOVIES", link: "/movies"}];
 export const Navigation = () =>  {
 
+    const setActiveClass = ({isActive}) => {
+        return clsx(s.link, isActive &&  s.active);
+    };
+
     return (
         <ul className={s.nav}>
             {menu.map((item, index) => (
-                <Link key={index} id='nav' to={item.link} className={s.li}>
-                    <span className={s.span}>{item.name}</span>
-                </Link>))}
+                <NavLink key={index} id='nav' to={item.link} className={setActiveClass}>
+                    <span className={s.name}>{item.name}</span>
+                    <span className={s.bar}></span>
+                </NavLink>))}
         </ul>
     );
 }

@@ -3,22 +3,39 @@
     justify-content: flex-end;
     gap: 1rem;
     padding-right: 1.25rem;
-
 }
 
-.li {
+.link {
     text-transform: uppercase;
     padding: 20px;
-}
-
-.li > span {
-    padding: 10px;
-    font-size: 24px;
+    position: relative;
     cursor: pointer;
-    transition: color 0.3s;
-    color: #f3f9fd;
 
-    &:hover {
-        color: #e44a07;
+    &.active {
+        color: #8965d5;
+        & .name {
+            color: #8965d5;
+        }
+        & .bar {
+            content: "";
+            position: absolute;
+            left: 0;
+            bottom: 0;
+            height: 2px;
+            width: 100%;
+            background: #8965d5;
+            transform: scaleX(1);
+            transform-origin: left;
+            transition: transform 1.5s ease;
+            z-index: 1;
+        }
+    }
+    & .name {
+        padding: 10px;
+        font-size: 24px;
+        cursor: pointer;
+        transition: color 0.3s;
+        color: #f3f9fd;
     }
 }
+
