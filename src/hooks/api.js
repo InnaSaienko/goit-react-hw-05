@@ -22,7 +22,6 @@ export const useFetchMovies = (searchParams) => {
                     },
                     signal: controller.signal,
                 };
-                console.log("url finally: ", url);
                 axios.get(url.toString(), options)
                     .then(response => {
                         setMovies(response.data);
@@ -36,7 +35,6 @@ export const useFetchMovies = (searchParams) => {
 
             }, [searchParams]
         );
-        console.log("response good");
         return {movies, loading, error};
     }
 ;

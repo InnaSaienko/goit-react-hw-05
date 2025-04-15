@@ -14,8 +14,8 @@ const MoviesPage = () => {
         language: "en-US",
         include_adult: false
     })
-    const { movies, loading, error } = useFetchMovies(searchParams);
-
+    const {movies, loading, error} = useFetchMovies(searchParams);
+    const { results } = movies;
     const initialValues = {
         query: searchParams.query,
     };
@@ -53,7 +53,7 @@ const MoviesPage = () => {
                     </Form>
                 </Formik>
             </header>
-            {loading ? <p>Loading movies...</p> : <MovieList movies={movies}/>}
+            {loading ? <p>Loading movies...</p> : <MovieList movies={results}/>}
         </>
     )
 }

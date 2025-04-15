@@ -1,0 +1,103 @@
+.wrapper {
+    display: flex;
+    flex-direction: column;
+    margin-top: 20px;
+    padding: 0 10%;
+    min-height: 100vh;
+
+    & .buttonWrapper {
+        margin: 0 auto;
+
+        & .button {
+            cursor: pointer;
+            outline: 0;
+            padding: 15px;
+            user-select: none;
+            font-size: 18px;
+            border-radius: 6px;
+            transition: all 0.2s ease-in-out;
+            color: #26203c;
+            background: #f3f9fd;
+
+        }
+    }
+
+    .title {
+        font-size: 30px;
+        color: #f3f9fd;
+        text-align: center;
+        padding: 10px;
+    }
+
+    .content {
+        display: flex;
+        justify-content: center;
+        align-items: center;
+        gap: 20px;
+    }
+
+    .poster {
+        width: 30%;
+        margin: 0 auto;
+
+        & > img {
+            max-width: 250px;
+            max-height: 350px;
+        }
+    }
+
+    .moreDetails {
+        /*height: auto;*/
+
+        & .origin {
+            padding: 5px 0;
+            border-bottom: 2px solid #f3f9fd;
+        }
+        & .genres {
+            padding: 5px 0;
+            border-bottom: 2px solid #f3f9fd;
+        }
+        & .productionCompanies {
+            display: flex;
+            padding: 5px 0;
+            border-bottom: 2px solid #f3f9fd;
+
+            & .company {
+                display: flex;
+                flex-direction: column;
+                gap: 10px;
+
+                & .logo {
+                    max-width: 50px;
+                    height: 50px;
+                    background: #f3f9fd;
+                    border-radius: 50%;
+
+                    & .img {
+                        width: 100%;
+                        height: 100%;
+                        object-fit: cover;
+                    }
+                }
+
+                & h4 {
+
+                }
+            }
+
+        }
+
+        & .overview {
+            padding: 5px 0;
+            border-bottom: 2px solid #f3f9fd;
+        }
+    }
+
+    .additionalInfo {
+    & .info {
+        display: flex;
+        justify-content: space-around;
+        padding: 10px 0;
+    }
+    }
+}

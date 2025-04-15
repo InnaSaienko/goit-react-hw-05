@@ -1,6 +1,35 @@
-.g_item {
+.gridList {
+    display: grid;
+    grid-template-columns: repeat(auto-fill, minmax(200px, 1fr));
+    gap: 20px;
+    padding: 20px;
+
+    & .g_item {
+        border: 2px solid #63529a;
+        border-radius: 4px;
+        padding: 5px;
+
+
+        & .title {
+            margin: 0;
+            padding: 5px 0;
+            font-size: 1.2rem;
+            text-align: center;
+        }
+    }
+}
+
+
+.itemPoster {
     display: flex;
-    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+}
+
+.img {
     width: 100%;
+    max-width: 200px;
+    height: auto;
+    border-radius: 8px;
 }
 

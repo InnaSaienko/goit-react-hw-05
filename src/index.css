@@ -1,1 +1,25 @@
+body {
+    margin: 0;
 
+    & .wrapper {
+        display: flex;
+        flex-direction: column;
+        min-height: 100vh;
+        background: #26203c;
+        color: #f3f9fd;
+
+        & .main {
+            padding-left: calc(10px + 5%);
+            padding-right: calc(10px + 5%);
+        }
+    }
+    li {
+        list-style-type: none;
+    }
+    a {
+        color: #f3f9fd;
+        cursor: pointer;
+        text-decoration: none;
+        font-size: 20px;
+    }
+}

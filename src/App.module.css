@@ -3,22 +3,9 @@
 * {
     box-sizing: border-box;
     font-family: "Roboto", sans-serif;
-}
-
-.main {
-    background: #210e60;
-    min-height: 100vh;
-    display: flex;
-    flex-direction: column;
-    align-items: center;
-    justify-content: flex-start;
-
-    > header:only-child {
-        flex: 1;
-        display: flex;
-        flex-direction: column;
-        justify-content: center;
-    }
+    color: #f3f9fd;
+    list-style-type: none;
+    padding: 0;
 }
 
 .button {
@@ -29,6 +16,6 @@
     font-size: 18px;
     border-radius: 4px;
     transition: all 0.2s ease-in-out;
-    color: #63529a;
-    background: white;
+    color:  #26203c;
+    background: #f3f9fd;
 }

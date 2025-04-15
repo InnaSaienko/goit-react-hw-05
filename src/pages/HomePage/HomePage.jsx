@@ -14,7 +14,7 @@ const HomePage = () => {
    const { movies, loading, error } = useFetchMovies(searchParams);
   return (
         <div>
-            <h1>Home</h1>
+            <h1 style={{ textAlign: 'center' }}>Home</h1>
             {error && <p>{error}</p>}
             {loading ? (
                 <p>Loading movies...</p>
