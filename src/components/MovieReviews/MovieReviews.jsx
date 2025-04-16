@@ -1,6 +1,6 @@
 import React, {useState} from 'react';
 import {useParams} from "react-router-dom";
-import {useFetchMovies} from "../../hooks/api.js";
+import {useFetchData} from "../../hooks/api.js";
 import Loader from "../Loader/Loader.jsx";
 
 const MovieReviews = () => {
@@ -10,8 +10,8 @@ const MovieReviews = () => {
         language: "en-US",
     });
 
-    const {movies, loading, error} = useFetchMovies(searchParams);
-    const reviews = movies?.results ?? [];
+    const {data, loading, error} = useFetchData(searchParams);
+    const reviews = data.results ?? [];
 
     return (
         <>

@@ -1,5 +1,5 @@
 import React, {lazy, Suspense,useState} from 'react';
-import {useFetchMovies} from "../../hooks/api.js"
+import {useFetchData} from "../../hooks/api.js"
 import Loader from "../../components/Loader/Loader.jsx";
 
 const MovieList = lazy(() =>
@@ -11,7 +11,7 @@ const HomePage = () => {
         page: 1,
         language: "en-US",
     });
-   const { movies, loading, error } = useFetchMovies(searchParams);
+   const { data, loading, error } = useFetchData(searchParams);
   return (
         <div>
             <h1 style={{ textAlign: 'center' }}>Home</h1>
@@ -20,7 +20,7 @@ const HomePage = () => {
                 <p>Loading movies...</p>
             ) : (
                 <Suspense fallback={<Loader/>}>
-                    <MovieList movies={movies.results} />
+                    <MovieList movies={data.results} />
                 </Suspense>
             )}
         </div>

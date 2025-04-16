@@ -1,6 +1,6 @@
 import React, {useState} from 'react';
 import {useParams} from "react-router-dom";
-import {useFetchMovies} from "../../hooks/api.js";
+import {useFetchData} from "../../hooks/api.js";
 import Loader from "../Loader/Loader.jsx";
 import {getFullImageUrl} from "../../utils/utils.js";
 import s from "./MovieCast.module.css";
@@ -12,8 +12,8 @@ const MovieCast = () => {
         endPointPath: `3/movie/${id}/credits`,
         language: "en-US",
     });
-    const {movies, loading, error} = useFetchMovies(searchParams);
-    const cast = movies?.cast ?? [];
+    const {data, loading, error} = useFetchData(searchParams);
+    const cast = data.cast ?? [];
     return (
         <>
             {error && <p>{error}</p>}

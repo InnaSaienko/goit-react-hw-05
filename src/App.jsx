@@ -6,7 +6,7 @@ import Loader from "./components/Loader/Loader.jsx";
 
 const HomePage = lazy(() => import('./pages/HomePage/HomePage.jsx'));
 const MoviesPage = lazy(() => import('./pages/MoviesPage/MoviesPage.jsx'));
-const MovieDetailsPage = lazy(() => import('./components/MovieDetailsPage/MovieDetailsPage'));
+const MovieDetailsPage = lazy(() => import('./pages/MovieDetailsPage/MovieDetailsPage'));
 const MovieCast = lazy(() => import('./components/MovieCast/MovieCast'));
 const MovieReviews = lazy(() => import('./components/MovieReviews/MovieReviews'));
 const NotFoundPage = lazy(() => import('./components/NotFoundPage/NotFoundPage'));

@@ -4,13 +4,14 @@ import axios from "axios";
 const accessToken = import.meta.env.VITE_TMDB_API_TOKEN;
 const baseUrl = import.meta.env.VITE_TMDB_URL;
 
-export const useFetchMovies = (searchParams) => {
-        const [movies, setMovies] = useState([]);
+export const useFetchData = (searchParams) => {
+        const [data, setData] = useState([]);
         const [loading, setLoading] = useState(true);
         const [error, setError] = useState(null);
 
         useEffect(() => {
                 const controller = new AbortController();
+
                 const {endPointPath, ...queryParams} = searchParams;
                 const url = new URL(endPointPath, baseUrl);
                 const searchParamsRest = new URLSearchParams(queryParams);
@@ -22,9 +23,10 @@ export const useFetchMovies = (searchParams) => {
                     },
                     signal: controller.signal,
                 };
+                console.log("url finnaly: ", url.toString());
                 axios.get(url.toString(), options)
                     .then(response => {
-                        setMovies(response.data);
+                        setData(response.data);
                         setLoading(false);
                     })
                     .catch(err => {
@@ -35,7 +37,9 @@ export const useFetchMovies = (searchParams) => {
 
             }, [searchParams]
         );
-        return {movies, loading, error};
+    console.log("data response: ", data);
+
+        return {data, loading, error};
     }
 ;
 

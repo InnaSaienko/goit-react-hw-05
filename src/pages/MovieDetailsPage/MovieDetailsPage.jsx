@@ -1,8 +1,8 @@
 import React, {useState} from 'react';
 import {Link, Outlet, useNavigate, useParams} from "react-router-dom";
-import {useFetchMovies} from "../../hooks/api.js";
+import {useFetchData} from "../../hooks/api.js";
 import {getFullImageUrl} from "../../utils/utils.js";
-import Loader from "../Loader/Loader.jsx";
+import Loader from "../../components/Loader/Loader.jsx";
 import s from "./MovieDetailsPage.module.css";
 
 const additionalInfo = ["Cast", "Reviews"];
@@ -15,7 +15,7 @@ const MovieDetailsPage = () => {
         language: "en-US",
         page: 1,
     });
-    const {movies, loading, error} = useFetchMovies(searchParams);
+    const {data, loading, error} = useFetchData(searchParams);
     return (
         <>
             {error && <p>{error}</p>}
@@ -24,26 +24,26 @@ const MovieDetailsPage = () => {
                     <div className={s.buttonWrapper}>
                         <button className={s.button} onClick={() => navigate('/')}>Go back</button>
                     </div>
-                    <h1 className={s.title}>{movies.original_title}</h1>
+                    <h1 className={s.title}>{data.original_title}</h1>
                     <div className={s.content}>
                         <div className={s.poster}>
-                            <img src={getFullImageUrl(movies.poster_path)} alt={movies.tagline}/>
+                            <img src={getFullImageUrl(data.poster_path)} alt={data.tagline}/>
                         </div>
                         <div className={s.moreDetails}>
                             <div className={s.origin}>
                                 <h3>Origin Countrie: </h3>
-                                <span>${movies.origin_country}</span>
+                                <span>${data.origin_country}</span>
                             </div>
                             <div className={s.genres}>
                                 <h3>Genres</h3>
-                                {movies.genres.map((genre, index) => (
+                                {data.genres.map((genre, index) => (
                                     <li key={index}>{genre.name}</li>
                                 ))}
                             </div>
                             <div className={s.productionCompanies}>
-                                {movies.production_companies.length > 0 ? (
-                                    movies.production_companies.map(company => (
-                                        <div className={s.company} key={company.logo_path}>
+                                {data.production_companies.length > 0 ? (
+                                    data.production_companies.map((company, index) => (
+                                        <div className={s.company} key={index}>
                                             <div className={s.logo}>
                                                 <img className={s.img} src={getFullImageUrl(company.logo_path)}
                                                      alt={company.name}/>
@@ -54,7 +54,7 @@ const MovieDetailsPage = () => {
                                     ))
                                 ) : ("")}
                             </div>
-                            <div className={s.overview}>{movies.overview}</div>
+                            <div className={s.overview}>{data.overview}</div>
                         </div>
                     </div>
                     <ul className={s.additionalInfo}>

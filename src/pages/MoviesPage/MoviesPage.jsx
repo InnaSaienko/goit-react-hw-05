@@ -1,17 +1,19 @@
-import React, {useMemo} from 'react';
+import React, {useEffect, useMemo, useState} from 'react';
 import {ErrorMessage, Field, Form, Formik} from "formik";
 import s from "./MoviesPage.module.css"
 import toast from "react-hot-toast";
-import * as Yup from "yup"
-import {useFetchMovies} from "../../hooks/api.js";
+import * as Yup from "yup";
 import MovieList from "../../components/MovieList/MovieList.jsx";
 import {useSearchParams} from "react-router-dom";
+import {useFetchDataFunction} from "../../hooks/apiFunction.js";
 
 const MoviesPage = () => {
+    const [data, setData] = useState([]);
+    const [loading, setLoading] = useState(false);
+    const [error, setError] = useState(null);
     const [searchParams, setSearchParams] = useSearchParams();
     const query = searchParams.get("query") || "";
     const page = parseInt(searchParams.get("page")) || 1;
-
     const searchParamsObj = useMemo(() => ({
         endPointPath: "3/search/movie",
         query,
@@ -20,10 +22,29 @@ const MoviesPage = () => {
         include_adult: false
     }), [query, page]);
 
-    const {movies, loading} = useFetchMovies(searchParamsObj);
-    const { results  = [] } = movies;
+    useEffect(() => {
+        if (!query.trim()) return;
+        const abortController = new AbortController();
+        const getData = async () => {
+            try {
+                setLoading(true);
+                const result = await useFetchDataFunction(searchParamsObj, abortController.signal);
+                setData(result.results);
+            } catch (e) {
+                setError(e);
+            } finally {
+                setLoading(false);
+            }
+        };
 
-    const initialValues = { query };
+        getData();
+
+        return () => {
+            abortController.abort();
+        };
+    }, [searchParamsObj]);
+
+    const initialValues = {query};
     const validationSchema = Yup.object({
         query: Yup.string()
             .min(3, "Query must be at least 3 characters long."),
@@ -54,7 +75,7 @@ const MoviesPage = () => {
                     </Form>
                 </Formik>
             </header>
-            {loading ? <p>Loading movies...</p> : <MovieList movies={results}/>}
+            {loading ? <p>Loading movies...</p> : <MovieList movies={data}/>}
         </>
     )
 }
