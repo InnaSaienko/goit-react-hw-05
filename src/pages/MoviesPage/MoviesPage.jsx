@@ -1,24 +1,29 @@
-import React, {useState} from 'react';
+import React, {useMemo} from 'react';
 import {ErrorMessage, Field, Form, Formik} from "formik";
 import s from "./MoviesPage.module.css"
 import toast from "react-hot-toast";
 import * as Yup from "yup"
 import {useFetchMovies} from "../../hooks/api.js";
 import MovieList from "../../components/MovieList/MovieList.jsx";
+import {useSearchParams} from "react-router-dom";
 
 const MoviesPage = () => {
-    const [searchParams, setSearchParams] = useState({
+    const [searchParams, setSearchParams] = useSearchParams();
+    const query = searchParams.get("query") || "";
+    const page = parseInt(searchParams.get("page")) || 1;
+
+    const searchParamsObj = useMemo(() => ({
         endPointPath: "3/search/movie",
-        query: "",
-        page: 1,
+        query,
+        page,
         language: "en-US",
         include_adult: false
-    })
-    const {movies, loading, error} = useFetchMovies(searchParams);
-    const { results } = movies;
-    const initialValues = {
-        query: searchParams.query,
-    };
+    }), [query, page]);
+
+    const {movies, loading} = useFetchMovies(searchParamsObj);
+    const { results  = [] } = movies;
+
+    const initialValues = { query };
     const validationSchema = Yup.object({
         query: Yup.string()
             .min(3, "Query must be at least 3 characters long."),
@@ -27,11 +32,7 @@ const MoviesPage = () => {
         if (values.query === '') {
             toast.error('Please enter text to search for images.');
         } else {
-            setSearchParams(prev => ({
-                ...prev,
-                query: values.query,
-                page: 1,
-            }));
+            setSearchParams({query: values.query.trim(), page: 1});
         }
         actions.resetForm();
     };
