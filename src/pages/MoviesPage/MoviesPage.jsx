@@ -10,7 +10,6 @@ import {fetchData} from "../../hooks/apiFunction.js";
 const MoviesPage = () => {
     const [data, setData] = useState([]);
     const [loading, setLoading] = useState(false);
-    const [error, setError] = useState(null);
     const [searchParams, setSearchParams] = useSearchParams();
     const query = searchParams.get("query") || "";
     const page = parseInt(searchParams.get("page")) || 1;
@@ -28,10 +27,15 @@ const MoviesPage = () => {
         const getData = async () => {
             try {
                 setLoading(true);
+                setData([]);
                 const result = await fetchData(searchParamsObj, abortController.signal);
-                setData(result.results);
+                if (result.status && result.status >= 400) {
+                    toast.error(`Error: ${result.statusText || 'Something went wrong'}`);
+                } else {
+                    setData(result.results);
+                }
             } catch (e) {
-                setError(e);
+                toast.error(e.message || 'Error fetching movies');
             } finally {
                 setLoading(false);
             }
