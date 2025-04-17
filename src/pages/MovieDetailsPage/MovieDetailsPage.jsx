@@ -1,5 +1,5 @@
-import React, {useState} from 'react';
-import {Link, Outlet, useNavigate, useParams} from "react-router-dom";
+import React, {useRef, useState} from 'react';
+import {Link, Outlet, useLocation, useNavigate, useParams} from "react-router-dom";
 import {useFetchData} from "../../hooks/api.js";
 import {getFullImageUrl} from "../../utils/utils.js";
 import Loader from "../../components/Loader/Loader.jsx";
@@ -9,7 +9,11 @@ const additionalInfo = ["Cast", "Reviews"];
 
 const MovieDetailsPage = () => {
     const {id} = useParams();
+    const location = useLocation();
     const navigate = useNavigate();
+    const goBack = useRef(location.state?.from ?? "/movies");
+
+
     const [searchParams, setSearchParams] = useState({
         endPointPath: `3/movie/${id}`,
         language: "en-US",
@@ -22,7 +26,7 @@ const MovieDetailsPage = () => {
             {loading ? (<Loader/>) : (
                 <div className={s.wrapper}>
                     <div className={s.buttonWrapper}>
-                        <button className={s.button} onClick={() => navigate('/')}>Go back</button>
+                        <button className={s.button} onClick={() => navigate(goBack.current)}>Go back</button>
                     </div>
                     <h1 className={s.title}>{data.original_title}</h1>
                     <div className={s.content}>
