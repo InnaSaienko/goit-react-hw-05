@@ -5,7 +5,7 @@ import toast from "react-hot-toast";
 import * as Yup from "yup";
 import MovieList from "../../components/MovieList/MovieList.jsx";
 import {useSearchParams} from "react-router-dom";
-import {useFetchDataFunction} from "../../hooks/apiFunction.js";
+import {fetchData} from "../../hooks/apiFunction.js";
 
 const MoviesPage = () => {
     const [data, setData] = useState([]);
@@ -28,7 +28,7 @@ const MoviesPage = () => {
         const getData = async () => {
             try {
                 setLoading(true);
-                const result = await useFetchDataFunction(searchParamsObj, abortController.signal);
+                const result = await fetchData(searchParamsObj, abortController.signal);
                 setData(result.results);
             } catch (e) {
                 setError(e);

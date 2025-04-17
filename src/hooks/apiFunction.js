@@ -3,7 +3,7 @@ import axios from 'axios';
 const accessToken = import.meta.env.VITE_TMDB_API_TOKEN;
 const baseUrl = import.meta.env.VITE_TMDB_URL;
 
-export const useFetchDataFunction = async (searchParams, signal) => {
+export const fetchData = async (searchParams, signal) => {
     const {endPointPath, ...queryParams} = searchParams;
     const url = new URL(endPointPath, baseUrl);
     const searchParamsRest = new URLSearchParams(queryParams);
